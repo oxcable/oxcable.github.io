@@ -383,11 +383,11 @@
 <span class='doccomment'>//! # Example</span>
 <span class='doccomment'>//! </span>
 <span class='doccomment'>//! The following example creates a graph with two different branches into</span>
-<span class='doccomment'>//! a stereo output. It feeds an oscillator to the left channel, and</span>
-<span class='doccomment'>//! a microphone with delay into the right channel.</span>
+<span class='doccomment'>//! a stereo output. It feeds the micropgone to the left channel, and</span>
+<span class='doccomment'>//! a low-passed oscillator into the right channel.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```no_run</span>
-<span class='doccomment'>//! use oxcable::delay::Delay;</span>
+<span class='doccomment'>//! use oxcable::filters::first_order::{Filter, LowPass};</span>
 <span class='doccomment'>//! use oxcable::graph::{DeviceGraph, Tick};</span>
 <span class='doccomment'>//! use oxcable::io::audio::AudioEngine;</span>
 <span class='doccomment'>//! use oxcable::oscillator::*;</span>
@@ -396,15 +396,15 @@
 <span class='doccomment'>//! let mut graph = DeviceGraph::new();</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! // Add nodes to graph</span>
-<span class='doccomment'>//! let oscillator = graph.add_node(Oscillator::new(Sine).freq(440.0));</span>
 <span class='doccomment'>//! let microphone = graph.add_node(engine.default_input(1).unwrap());</span>
-<span class='doccomment'>//! let delay = graph.add_node(Delay::new(0.5, 0.5, 0.5, 1));</span>
+<span class='doccomment'>//! let oscillator = graph.add_node(Oscillator::new(Sine).freq(440.0));</span>
+<span class='doccomment'>//! let filter = graph.add_node(Filter::new(LowPass(8000f32), 1));</span>
 <span class='doccomment'>//! let speaker = graph.add_node(engine.default_output(2).unwrap());</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! // Connect devices together</span>
-<span class='doccomment'>//! graph.add_edge(oscillator, 0, speaker, 0);</span>
-<span class='doccomment'>//! graph.add_edge(microphone, 0, delay, 0);</span>
-<span class='doccomment'>//! graph.add_edge(delay, 0, speaker, 1);</span>
+<span class='doccomment'>//! graph.add_edge(microphone, 0, speaker, 0);</span>
+<span class='doccomment'>//! graph.add_edge(oscillator, 0, filter, 0);</span>
+<span class='doccomment'>//! graph.add_edge(filter, 0, speaker, 1);</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! // Play audio ad nauseam.</span>
 <span class='doccomment'>//! graph.tick_forever();</span>

@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-1873' class='srclink' href='../../src/oxcable/types.rs.html#72-85' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-1335' class='srclink' href='../../src/oxcable/types.rs.html#72-85' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait AudioDevice {
     fn <a href='#tymethod.num_inputs' class='fnname'>num_inputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>;
     fn <a href='#tymethod.num_outputs' class='fnname'>num_outputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>;
@@ -64,12 +64,7 @@ slices may be passed in.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/adsr/struct.Adsr.html' title='oxcable::adsr::Adsr'>Adsr</a></code></li>
-<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/delay/struct.Delay.html' title='oxcable::delay::Delay'>Delay</a></code></li>
-<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/dynamics/compressor/struct.Compressor.html' title='oxcable::dynamics::compressor::Compressor'>Compressor</a></code></li>
-<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/dynamics/limiter/struct.Limiter.html' title='oxcable::dynamics::limiter::Limiter'>Limiter</a></code></li>
-<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/dynamics/noise_gate/struct.NoiseGate.html' title='oxcable::dynamics::noise_gate::NoiseGate'>NoiseGate</a></code></li>
-<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/filters/first_order/struct.Filter.html' title='oxcable::filters::first_order::Filter'>Filter</a></code></li>
+    <li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/filters/first_order/struct.Filter.html' title='oxcable::filters::first_order::Filter'>Filter</a></code></li>
 <li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/filters/second_order/struct.Filter.html' title='oxcable::filters::second_order::Filter'>Filter</a></code></li>
 <li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/io/audio/struct.AudioIn.html' title='oxcable::io::audio::AudioIn'>AudioIn</a></code></li>
 <li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/io/audio/struct.AudioOut.html' title='oxcable::io::audio::AudioOut'>AudioOut</a></code></li>
@@ -80,8 +75,6 @@ slices may be passed in.</p>
 <li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/mixers/multiplexer/struct.Multiplexer.html' title='oxcable::mixers::multiplexer::Multiplexer'>Multiplexer</a></code></li>
 <li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/mixers/multiplier/struct.Multiplier.html' title='oxcable::mixers::multiplier::Multiplier'>Multiplier</a></code></li>
 <li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/oscillator/struct.Oscillator.html' title='oxcable::oscillator::Oscillator'>Oscillator</a></code></li>
-<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/reverb/moorer_reverb/struct.MoorerReverb.html' title='oxcable::reverb::moorer_reverb::MoorerReverb'>MoorerReverb</a></code></li>
-<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/tremolo/struct.Tremolo.html' title='oxcable::tremolo::Tremolo'>Tremolo</a></code></li>
 <li><code>impl&lt;D&gt; <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/wrappers/struct.Messaged.html' title='oxcable::wrappers::Messaged'>Messaged</a>&lt;D&gt; <span class='where'>where D: <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> + <a class='trait' href='../../oxcable/types/trait.MessageReceiver.html' title='oxcable::types::MessageReceiver'>MessageReceiver</a></span></code></li>
 </ul><script type="text/javascript" async
                               src="../../implementors/oxcable/types/trait.AudioDevice.js">

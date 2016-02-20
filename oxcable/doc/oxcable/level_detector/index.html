@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `filters` mod in crate `oxcable`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, filters">
+    <meta name="description" content="API documentation for the Rust `level_detector` mod in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, level_detector">
 
-    <title>oxcable::filters - Rust</title>
+    <title>oxcable::level_detector - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
@@ -26,7 +26,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>oxcable</a></p><script>window.sidebarCurrent = {name: 'filters', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'><a href='../index.html'>oxcable</a></p><script>window.sidebarCurrent = {name: 'level_detector', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -41,32 +41,19 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>oxcable</a>::<wbr><a class='mod' href=''>filters</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>oxcable</a>::<wbr><a class='mod' href=''>level_detector</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-129' class='srclink' href='../../src/oxcable/filters/mod.rs.html#1-8' title='goto source code'>[src]</a></span></h1>
-<div class='docblock'><p>Linear IIR filters.</p>
-
-<p>These filters can be used to amplify or attenuate different frequencies in
-the provided signal. A second order filter will provide smaller transition
-bands, and therefore sharper cutoffs.</p>
-</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+        </span><a id='src-905' class='srclink' href='../../src/oxcable/level_detector.rs.html#1-70' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>An envelope estimator.</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr class=' module-item'>
-                        <td><a class='mod' href='first_order/index.html'
-                               title='oxcable::filters::first_order'>first_order</a></td>
+                        <td><a class='struct' href='struct.LevelDetector.html'
+                               title='oxcable::level_detector::LevelDetector'>LevelDetector</a></td>
                         <td class='docblock short'>
-                             <p>A first order IIR filter.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='mod' href='second_order/index.html'
-                               title='oxcable::filters::second_order'>second_order</a></td>
-                        <td class='docblock short'>
-                             <p>A second order IIR filter.</p>
+                             <p>Performs envelope estimation for a signal.</p>
 
                         </td>
                     </tr>

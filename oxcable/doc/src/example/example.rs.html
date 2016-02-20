@@ -90,7 +90,7 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>test</span>))]</span>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>oscillator</span>;
-    <span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>delay</span>::<span class='ident'>Delay</span>;
+    <span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>filters</span>::<span class='ident'>first_order</span>::{<span class='ident'>Filter</span>, <span class='ident'>LowPass</span>};
     <span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>graph</span>::{<span class='ident'>DeviceGraph</span>, <span class='ident'>Tick</span>};
     <span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>io</span>::<span class='ident'>audio</span>::<span class='ident'>AudioEngine</span>;
     <span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>mixers</span>::<span class='ident'>Gain</span>;
@@ -99,21 +99,21 @@
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Setting up signal chain...&quot;</span>);
     <span class='kw'>let</span> <span class='ident'>engine</span> <span class='op'>=</span> <span class='ident'>AudioEngine</span>::<span class='ident'>with_buffer_size</span>(<span class='number'>256</span>).<span class='ident'>unwrap</span>();
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>graph</span> <span class='op'>=</span> <span class='ident'>DeviceGraph</span>::<span class='ident'>new</span>();
-    <span class='kw'>let</span> <span class='ident'>spk</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>engine</span>.<span class='ident'>default_output</span>(<span class='number'>2</span>).<span class='ident'>unwrap</span>());
+    <span class='kw'>let</span> <span class='ident'>speaker</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>engine</span>.<span class='ident'>default_output</span>(<span class='number'>2</span>).<span class='ident'>unwrap</span>());
 
-    <span class='kw'>let</span> <span class='ident'>mic</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>engine</span>.<span class='ident'>default_input</span>(<span class='number'>1</span>).<span class='ident'>unwrap</span>());
-    <span class='kw'>let</span> <span class='ident'>del</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>Delay</span>::<span class='ident'>new</span>(<span class='number'>0.5</span>, <span class='number'>0.5</span>, <span class='number'>0.5</span>, <span class='number'>1</span>));
-    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>mic</span>, <span class='number'>0</span>, <span class='ident'>del</span>, <span class='number'>0</span>).<span class='ident'>unwrap</span>();
-    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>del</span>, <span class='number'>0</span>, <span class='ident'>spk</span>, <span class='number'>0</span>).<span class='ident'>unwrap</span>();
+    <span class='kw'>let</span> <span class='ident'>microphone</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>engine</span>.<span class='ident'>default_input</span>(<span class='number'>1</span>).<span class='ident'>unwrap</span>());
+    <span class='kw'>let</span> <span class='ident'>filter</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>Filter</span>::<span class='ident'>new</span>(<span class='ident'>LowPass</span>(<span class='number'>8000f32</span>), <span class='number'>1</span>));
+    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>microphone</span>, <span class='number'>0</span>, <span class='ident'>filter</span>, <span class='number'>0</span>).<span class='ident'>unwrap</span>();
+    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>filter</span>, <span class='number'>0</span>, <span class='ident'>speaker</span>, <span class='number'>0</span>).<span class='ident'>unwrap</span>();
 
     <span class='kw'>let</span> <span class='ident'>lfo</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>Oscillator</span>::<span class='ident'>new</span>(<span class='ident'>oscillator</span>::<span class='ident'>Sine</span>).<span class='ident'>freq</span>(<span class='number'>10.0</span>));
-    <span class='kw'>let</span> <span class='ident'>osc</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(
+    <span class='kw'>let</span> <span class='ident'>oscillator</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(
         <span class='ident'>Oscillator</span>::<span class='ident'>new</span>(<span class='ident'>Tri</span>(<span class='ident'>PolyBlep</span>)).<span class='ident'>freq</span>(<span class='number'>440.0</span>).<span class='ident'>lfo_intensity</span>(<span class='number'>0.1</span>)
     );
     <span class='kw'>let</span> <span class='ident'>gain</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>Gain</span>::<span class='ident'>new</span>(<span class='op'>-</span><span class='number'>6.0</span>, <span class='number'>1</span>));
-    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>lfo</span>, <span class='number'>0</span>, <span class='ident'>osc</span>, <span class='number'>0</span>).<span class='ident'>unwrap</span>();
-    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>osc</span>, <span class='number'>0</span>, <span class='ident'>gain</span>, <span class='number'>0</span>).<span class='ident'>unwrap</span>();
-    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>gain</span>, <span class='number'>0</span>, <span class='ident'>spk</span>, <span class='number'>1</span>).<span class='ident'>unwrap</span>();
+    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>lfo</span>, <span class='number'>0</span>, <span class='ident'>oscillator</span>, <span class='number'>0</span>).<span class='ident'>unwrap</span>();
+    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>oscillator</span>, <span class='number'>0</span>, <span class='ident'>gain</span>, <span class='number'>0</span>).<span class='ident'>unwrap</span>();
+    <span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>gain</span>, <span class='number'>0</span>, <span class='ident'>speaker</span>, <span class='number'>1</span>).<span class='ident'>unwrap</span>();
 
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Playing. Press Enter to quit...&quot;</span>);
     <span class='ident'>graph</span>.<span class='ident'>tick_until_enter</span>();

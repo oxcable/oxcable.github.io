@@ -230,19 +230,19 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! # Example</span>
-<span class='doccomment'>//! The following will pass microphone input through a delay unit, then out to</span>
-<span class='doccomment'>//! the speaker:</span>
+<span class='doccomment'>//! The following will pass microphone input through a low pass filter, then out</span>
+<span class='doccomment'>//! to the speaker:</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```no_run</span>
-<span class='doccomment'>//! use oxcable::delay::Delay;</span>
 <span class='doccomment'>//! use oxcable::chain::{DeviceChain, Tick};</span>
+<span class='doccomment'>//! use oxcable::filters::first_order::{Filter, LowPass};</span>
 <span class='doccomment'>//! use oxcable::io::audio::AudioEngine;</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! let engine = AudioEngine::with_buffer_size(256).unwrap();</span>
 <span class='doccomment'>//! let mut chain = DeviceChain::from(</span>
 <span class='doccomment'>//!     engine.default_input(1).unwrap()</span>
 <span class='doccomment'>//! ).into(</span>
-<span class='doccomment'>//!     Delay::new(1.0, 0.5, 0.5, 1)</span>
+<span class='doccomment'>//!     Filter::new(LowPass(8000f32), 1)</span>
 <span class='doccomment'>//! ).into(</span>
 <span class='doccomment'>//!     engine.default_output(1).unwrap()</span>
 <span class='doccomment'>//! );</span>

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["LevelDetector","Performs envelope estimation for a signal."]]});

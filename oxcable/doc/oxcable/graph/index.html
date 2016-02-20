@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-792' class='srclink' href='../../src/oxcable/graph.rs.html#1-329' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-401' class='srclink' href='../../src/oxcable/graph.rs.html#1-329' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A container for audio devices in an acyclic graph.</p>
 
 <p>A graph can be used when many audio devices need to connect in complex
@@ -58,10 +58,10 @@ process the devices in order of their dependencies.</p>
 
 <h1 id='example' class='section-header'><a href='#example'>Example</a></h1>
 <p>The following example creates a graph with two different branches into
-a stereo output. It feeds an oscillator to the left channel, and
-a microphone with delay into the right channel.</p>
+a stereo output. It feeds the micropgone to the left channel, and
+a low-passed oscillator into the right channel.</p>
 <pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>delay</span>::<span class='ident'>Delay</span>;
+<span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>filters</span>::<span class='ident'>first_order</span>::{<span class='ident'>Filter</span>, <span class='ident'>LowPass</span>};
 <span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>graph</span>::{<span class='ident'>DeviceGraph</span>, <span class='ident'>Tick</span>};
 <span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>io</span>::<span class='ident'>audio</span>::<span class='ident'>AudioEngine</span>;
 <span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>oscillator</span>::<span class='op'>*</span>;
@@ -70,15 +70,15 @@ a microphone with delay into the right channel.</p>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>graph</span> <span class='op'>=</span> <span class='ident'>DeviceGraph</span>::<span class='ident'>new</span>();
 
 <span class='comment'>// Add nodes to graph</span>
-<span class='kw'>let</span> <span class='ident'>oscillator</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>Oscillator</span>::<span class='ident'>new</span>(<span class='ident'>Sine</span>).<span class='ident'>freq</span>(<span class='number'>440.0</span>));
 <span class='kw'>let</span> <span class='ident'>microphone</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>engine</span>.<span class='ident'>default_input</span>(<span class='number'>1</span>).<span class='ident'>unwrap</span>());
-<span class='kw'>let</span> <span class='ident'>delay</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>Delay</span>::<span class='ident'>new</span>(<span class='number'>0.5</span>, <span class='number'>0.5</span>, <span class='number'>0.5</span>, <span class='number'>1</span>));
+<span class='kw'>let</span> <span class='ident'>oscillator</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>Oscillator</span>::<span class='ident'>new</span>(<span class='ident'>Sine</span>).<span class='ident'>freq</span>(<span class='number'>440.0</span>));
+<span class='kw'>let</span> <span class='ident'>filter</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>Filter</span>::<span class='ident'>new</span>(<span class='ident'>LowPass</span>(<span class='number'>8000f32</span>), <span class='number'>1</span>));
 <span class='kw'>let</span> <span class='ident'>speaker</span> <span class='op'>=</span> <span class='ident'>graph</span>.<span class='ident'>add_node</span>(<span class='ident'>engine</span>.<span class='ident'>default_output</span>(<span class='number'>2</span>).<span class='ident'>unwrap</span>());
 
 <span class='comment'>// Connect devices together</span>
-<span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>oscillator</span>, <span class='number'>0</span>, <span class='ident'>speaker</span>, <span class='number'>0</span>);
-<span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>microphone</span>, <span class='number'>0</span>, <span class='ident'>delay</span>, <span class='number'>0</span>);
-<span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>delay</span>, <span class='number'>0</span>, <span class='ident'>speaker</span>, <span class='number'>1</span>);
+<span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>microphone</span>, <span class='number'>0</span>, <span class='ident'>speaker</span>, <span class='number'>0</span>);
+<span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>oscillator</span>, <span class='number'>0</span>, <span class='ident'>filter</span>, <span class='number'>0</span>);
+<span class='ident'>graph</span>.<span class='ident'>add_edge</span>(<span class='ident'>filter</span>, <span class='number'>0</span>, <span class='ident'>speaker</span>, <span class='number'>1</span>);
 
 <span class='comment'>// Play audio ad nauseam.</span>
 <span class='ident'>graph</span>.<span class='ident'>tick_forever</span>();</pre>
