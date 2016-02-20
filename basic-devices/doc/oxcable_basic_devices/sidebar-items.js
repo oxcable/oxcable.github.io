@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["adsr","An ADSR envelope filter."],["delay","A simple delay filter."],["dynamics","Audio devices to perform dynamics processing."],["reverb","A reverb filter."],["tremolo","A tremolo filter."]]});
