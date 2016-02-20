@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Transformer","A container for precomputed values to perform FFTs of a fixed size."]]});

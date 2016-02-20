@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `DeviceGraph` struct in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, DeviceGraph">
+
+    <title>oxcable::graph::DeviceGraph - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>graph</a></p><script>window.sidebarCurrent = {name: 'DeviceGraph', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>graph</a>::<wbr><a class='struct' href=''>DeviceGraph</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-798' class='srclink' href='../../src/oxcable/graph.rs.html#49-54' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct DeviceGraph {
+    // some fields omitted
+}</pre><div class='docblock'><p>An acyclic graph for audio devices.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../oxcable/graph/struct.DeviceGraph.html' title='oxcable::graph::DeviceGraph'>DeviceGraph</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; Self</code></h4>
+<div class='docblock'><p>Creates an empty graph.</p>
+</div><h4 id='method.add_node' class='method'><code>fn <a href='#method.add_node' class='fnname'>add_node</a>&lt;D&gt;(&amp;mut self, device: D) -&gt; <a class='struct' href='../../oxcable/graph/struct.AudioNodeIdx.html' title='oxcable::graph::AudioNodeIdx'>AudioNodeIdx</a> <span class='where'>where D: 'static + <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a></span></code></h4>
+<div class='docblock'><p>Adds a new device into the graph, with no connections. Returns
+a identifier that refers back to this device.</p>
+</div><h4 id='method.add_edge' class='method'><code>fn <a href='#method.add_edge' class='fnname'>add_edge</a>(&amp;mut self, src: <a class='struct' href='../../oxcable/graph/struct.AudioNodeIdx.html' title='oxcable::graph::AudioNodeIdx'>AudioNodeIdx</a>, src_ch: <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, dest: <a class='struct' href='../../oxcable/graph/struct.AudioNodeIdx.html' title='oxcable::graph::AudioNodeIdx'>AudioNodeIdx</a>, dest_ch: <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='../../oxcable/error/type.Result.html' title='oxcable::error::Result'>Result</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Connects two devices in the graph.</p>
+
+<ul>
+<li><code>src</code> and <code>dest</code> are identifiers for the actual devices to connect.</li>
+<li><code>src_ch</code> and <code>dest_ch</code> are the channel indices of the two devices.</li>
+</ul>
+
+<p>If invalid indices are provided, or if the specified edge would create
+a cycle in the graph, an Err is returned and no changes dest the graph are
+made.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../oxcable/tick/trait.Tick.html' title='oxcable::tick::Tick'>Tick</a> for <a class='struct' href='../../oxcable/graph/struct.DeviceGraph.html' title='oxcable::graph::DeviceGraph'>DeviceGraph</a></code></h3><div class='impl-items'><h4 id='method.tick' class='method'><code>fn <a href='../../oxcable/tick/trait.Tick.html#method.tick' class='fnname'>tick</a>(&amp;mut self)</code></h4>
+<h4 id='method.tick_n_times' class='method'><code>fn <a href='../../oxcable/tick/trait.Tick.html#method.tick_n_times' class='fnname'>tick_n_times</a>(&amp;mut self, n: <a class='type' href='../../oxcable/types/type.Time.html' title='oxcable::types::Time'>Time</a>)</code></h4>
+<h4 id='method.tick_forever' class='method'><code>fn <a href='../../oxcable/tick/trait.Tick.html#method.tick_forever' class='fnname'>tick_forever</a>(&amp;mut self) -&gt; !</code></h4>
+<h4 id='method.tick_until_enter' class='method'><code>fn <a href='../../oxcable/tick/trait.Tick.html#method.tick_until_enter' class='fnname'>tick_until_enter</a>(&amp;mut self)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

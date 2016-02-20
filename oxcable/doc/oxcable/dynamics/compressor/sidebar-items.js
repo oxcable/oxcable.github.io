@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Message","Defines the messages that the Compressor supports."]],"struct":[["Compressor","A compression filter."]]});

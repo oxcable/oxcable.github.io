@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Messaged","Bundles a `MessageReceiver` with threaded message passing."]]});

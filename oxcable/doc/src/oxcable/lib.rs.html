@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="Source to the Rust file `src/lib.rs`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang">
+
+    <title>lib.rs.html -- source</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content source"><pre class="line-numbers"><span id="1">  1</span>
+<span id="2">  2</span>
+<span id="3">  3</span>
+<span id="4">  4</span>
+<span id="5">  5</span>
+<span id="6">  6</span>
+<span id="7">  7</span>
+<span id="8">  8</span>
+<span id="9">  9</span>
+<span id="10"> 10</span>
+<span id="11"> 11</span>
+<span id="12"> 12</span>
+<span id="13"> 13</span>
+<span id="14"> 14</span>
+<span id="15"> 15</span>
+<span id="16"> 16</span>
+<span id="17"> 17</span>
+<span id="18"> 18</span>
+<span id="19"> 19</span>
+<span id="20"> 20</span>
+<span id="21"> 21</span>
+<span id="22"> 22</span>
+<span id="23"> 23</span>
+<span id="24"> 24</span>
+<span id="25"> 25</span>
+<span id="26"> 26</span>
+<span id="27"> 27</span>
+<span id="28"> 28</span>
+<span id="29"> 29</span>
+<span id="30"> 30</span>
+<span id="31"> 31</span>
+<span id="32"> 32</span>
+<span id="33"> 33</span>
+<span id="34"> 34</span>
+<span id="35"> 35</span>
+<span id="36"> 36</span>
+<span id="37"> 37</span>
+<span id="38"> 38</span>
+<span id="39"> 39</span>
+<span id="40"> 40</span>
+<span id="41"> 41</span>
+<span id="42"> 42</span>
+<span id="43"> 43</span>
+<span id="44"> 44</span>
+<span id="45"> 45</span>
+<span id="46"> 46</span>
+<span id="47"> 47</span>
+<span id="48"> 48</span>
+<span id="49"> 49</span>
+<span id="50"> 50</span>
+<span id="51"> 51</span>
+<span id="52"> 52</span>
+<span id="53"> 53</span>
+<span id="54"> 54</span>
+<span id="55"> 55</span>
+<span id="56"> 56</span>
+<span id="57"> 57</span>
+<span id="58"> 58</span>
+<span id="59"> 59</span>
+<span id="60"> 60</span>
+<span id="61"> 61</span>
+<span id="62"> 62</span>
+<span id="63"> 63</span>
+<span id="64"> 64</span>
+<span id="65"> 65</span>
+<span id="66"> 66</span>
+<span id="67"> 67</span>
+<span id="68"> 68</span>
+<span id="69"> 69</span>
+<span id="70"> 70</span>
+<span id="71"> 71</span>
+<span id="72"> 72</span>
+<span id="73"> 73</span>
+<span id="74"> 74</span>
+<span id="75"> 75</span>
+<span id="76"> 76</span>
+<span id="77"> 77</span>
+<span id="78"> 78</span>
+<span id="79"> 79</span>
+<span id="80"> 80</span>
+<span id="81"> 81</span>
+<span id="82"> 82</span>
+<span id="83"> 83</span>
+<span id="84"> 84</span>
+<span id="85"> 85</span>
+<span id="86"> 86</span>
+<span id="87"> 87</span>
+<span id="88"> 88</span>
+<span id="89"> 89</span>
+<span id="90"> 90</span>
+<span id="91"> 91</span>
+<span id="92"> 92</span>
+<span id="93"> 93</span>
+<span id="94"> 94</span>
+<span id="95"> 95</span>
+<span id="96"> 96</span>
+<span id="97"> 97</span>
+<span id="98"> 98</span>
+<span id="99"> 99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+</pre><pre class='rust '>
+<span class='doccomment'>//! A signal processing framework for making music with rust.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! `oxcable` is designed with simple but powerful abstractions, with minimal</span>
+<span class='doccomment'>//! performance loss, while functioning in real-time.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! `oxcable` seeks to provide the basic building blocks necessary to build</span>
+<span class='doccomment'>//! digital instruments and effects, and provide the tools to chain these</span>
+<span class='doccomment'>//! devices together quickly and easily.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Getting started</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Let&#39;s start with a simple example. This script will generate a sine wave at</span>
+<span class='doccomment'>//! 440Hz, and play it on your computer&#39;s speakers or headphones in an infinite</span>
+<span class='doccomment'>//! loop:</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ```no_run</span>
+<span class='doccomment'>//! extern crate oxcable;</span>
+<span class='doccomment'>//! use oxcable::chain::{DeviceChain, Tick};</span>
+<span class='doccomment'>//! use oxcable::io::audio::AudioEngine;</span>
+<span class='doccomment'>//! use oxcable::oscillator::{Oscillator, Sine};</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! fn main() {</span>
+<span class='doccomment'>//!     let engine = AudioEngine::with_buffer_size(256).unwrap();</span>
+<span class='doccomment'>//!     let mut chain = DeviceChain::from(</span>
+<span class='doccomment'>//!         Oscillator::new(Sine).freq(440.0)</span>
+<span class='doccomment'>//!     ).into(</span>
+<span class='doccomment'>//!         engine.default_output(1).unwrap()</span>
+<span class='doccomment'>//!     );</span>
+<span class='doccomment'>//!     chain.tick_forever();</span>
+<span class='doccomment'>//! }</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Devices</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Defining an audio device can be done by implenting the</span>
+<span class='doccomment'>//! [`AudioDevice` trait](types/trait.AudioDevice.html).</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Let&#39;s define a very simple audio device: one that simply passes its input</span>
+<span class='doccomment'>//! straight to the output. This can be done in just a few lines:</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//! use oxcable::types::{AudioDevice, Sample, Time};</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! struct IdentityFilter;</span>
+<span class='doccomment'>//! impl AudioDevice for IdentityFilter {</span>
+<span class='doccomment'>//!     fn num_inputs(&amp;self) -&gt; usize { 1 }</span>
+<span class='doccomment'>//!     fn num_outputs(&amp;self) -&gt; usize { 1 }</span>
+<span class='doccomment'>//!     fn tick(&amp;mut self, _: Time, inputs: &amp;[Sample], outputs: &amp;mut[Sample]) {</span>
+<span class='doccomment'>//!         outputs[0] = inputs[0];</span>
+<span class='doccomment'>//!     }</span>
+<span class='doccomment'>//! }</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Once we&#39;ve defined a device, it is simple to use the device in isolation.</span>
+<span class='doccomment'>//! Say I want to test my filter. I can manually call tick a few times to</span>
+<span class='doccomment'>//! generate outputs:</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//! # use oxcable::types::{AudioDevice, Sample, Time};</span>
+<span class='doccomment'>//! # struct IdentityFilter;</span>
+<span class='doccomment'>//! # impl AudioDevice for IdentityFilter {</span>
+<span class='doccomment'>//! #     fn num_inputs(&amp;self) -&gt; usize { 1 }</span>
+<span class='doccomment'>//! #     fn num_outputs(&amp;self) -&gt; usize { 1 }</span>
+<span class='doccomment'>//! #     fn tick(&amp;mut self, _: Time, inputs: &amp;[Sample], outputs: &amp;mut[Sample]) {</span>
+<span class='doccomment'>//! #         outputs[0] = inputs[0];</span>
+<span class='doccomment'>//! #     }</span>
+<span class='doccomment'>//! # }</span>
+<span class='doccomment'>//! #</span>
+<span class='doccomment'>//! let mut input = [0.0];</span>
+<span class='doccomment'>//! let mut output = [0.0];</span>
+<span class='doccomment'>//! let mut filter = IdentityFilter;</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! for i in 0..8 {</span>
+<span class='doccomment'>//!     input[0] = i as f32;</span>
+<span class='doccomment'>//!     filter.tick(i, &amp;input, &amp;mut output);</span>
+<span class='doccomment'>//!     assert_eq!(i as f32, output[0]);</span>
+<span class='doccomment'>//! }</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! By adhering to the `AudioDevice` trait, however, this new device will drop</span>
+<span class='doccomment'>//! straight into generic containers like [`DeviceChain`](chain/index.html) or</span>
+<span class='doccomment'>//! [`DeviceGraph`](graph/index.html), and into wrappers such as the [`Buffered`</span>
+<span class='doccomment'>//! wrapper](wrappers/struct.Buffered.html).</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! `oxcable` defines many simple devices itself. A list of these devices may be</span>
+<span class='doccomment'>//! found under the [`AudioDevice`</span>
+<span class='doccomment'>//! documentation](types/trait.AudioDevice.html#implementors).</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Message Passing</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! To allow modifying audio device parameters while they are inside containers</span>
+<span class='doccomment'>//! or processesing in seperate threads, all setter behavior is instead</span>
+<span class='doccomment'>//! encapsulated inside a message passing system. Each device has its own</span>
+<span class='doccomment'>//! message `enum` type that describes the different actions it can handle.  The</span>
+<span class='doccomment'>//! device then handles those messages by implementing the</span>
+<span class='doccomment'>//! [`MessageReceiver` trait](types/trait.MessageReceiver.html).</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Using this trait, setters can be used by calling the `handle_message`</span>
+<span class='doccomment'>//! function and passing the specific message directly to the device.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! However, when devices are hidden behind trait objects or used to process in</span>
+<span class='doccomment'>//! a seperate thread, there is no way to get to the device to hand it the</span>
+<span class='doccomment'>//! message directly. In this case the [`Messaged`</span>
+<span class='doccomment'>//! wrapper](wrappers/struct.Messaged.html) provides an abstraction using</span>
+<span class='doccomment'>//! [Rust channels](https://doc.rust-lang.org/std/sync/mpsc/fn.channel.html).</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Thread Safety</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Unfortunately, `oxcable` is not able to provide `AudioDevice` containers</span>
+<span class='doccomment'>//! that are `Send`. This is due to a limitation in the `rust-portaudio` crate,</span>
+<span class='doccomment'>//! in which audio streams are not `Send`. This prohibits binding `AudioDevice`</span>
+<span class='doccomment'>//! trait objects with `Send`.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Therefore, when using generic containers, the signal chain must be</span>
+<span class='doccomment'>//! initialized in the thread it will eventually process audio.</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>byteorder</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>num</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>portaudio</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>portmidi</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rand</span>;
+
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>adsr</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>chain</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>delay</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>dynamics</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>error</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>filters</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>graph</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>io</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>mixers</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>oscillator</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>reverb</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>tick</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>tremolo</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>types</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>utils</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>voice_array</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>wrappers</span>;
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>mod</span> <span class='ident'>testing</span>;
+</pre>
+</section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

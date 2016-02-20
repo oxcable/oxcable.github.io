@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Message","Defines the messages that the MoorerReverb supports."]],"struct":[["MoorerReverb","An algorithmic, IIR reverberation filter."]]});

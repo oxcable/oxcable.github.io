@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Buffered` struct in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Buffered">
+
+    <title>oxcable::wrappers::Buffered - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>wrappers</a></p><script>window.sidebarCurrent = {name: 'Buffered', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>wrappers</a>::<wbr><a class='struct' href=''>Buffered</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-2219' class='srclink' href='../../src/oxcable/wrappers/buffered.rs.html#34-41' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Buffered&lt;D&gt; <span class='where'>where D: <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a></span> {
+    pub device: D,
+    pub inputs: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='type' href='../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a>&gt;,
+    pub outputs: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='type' href='../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a>&gt;,
+}</pre><div class='docblock'><p>Bundles an <code>AudioDevice</code> with allocated input and output buffers.</p>
+
+<p>To use the device, input samples must first be manually dropped into the
+<code>inputs</code> buffer, then <code>tick</code> may be called to generate outputs. The output
+samples can be found in the <code>outputs</code> buffer.</p>
+
+<h1 id='example' class='section-header'><a href='#example'>Example</a></h1><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>types</span>::{<span class='ident'>AudioDevice</span>, <span class='ident'>Sample</span>, <span class='ident'>Time</span>};
+<span class='kw'>struct</span> <span class='ident'>IdentityFilter</span>;
+<span class='kw'>impl</span> <span class='ident'>AudioDevice</span> <span class='kw'>for</span> <span class='ident'>IdentityFilter</span> {
+    <span class='kw'>fn</span> <span class='ident'>num_inputs</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> { <span class='number'>1</span> }
+    <span class='kw'>fn</span> <span class='ident'>num_outputs</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> { <span class='number'>1</span> }
+    <span class='kw'>fn</span> <span class='ident'>tick</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='ident'>Time</span>, <span class='ident'>inputs</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>Sample</span>], <span class='ident'>outputs</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span>[<span class='ident'>Sample</span>]) {
+        <span class='ident'>outputs</span>[<span class='number'>0</span>] <span class='op'>=</span> <span class='ident'>inputs</span>[<span class='number'>0</span>];
+    }
+}
+
+<span class='kw'>use</span> <span class='ident'>oxcable</span>::<span class='ident'>wrappers</span>::<span class='ident'>Buffered</span>;
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>filter</span> <span class='op'>=</span> <span class='ident'>Buffered</span>::<span class='ident'>from</span>(<span class='ident'>IdentityFilter</span>);
+
+<span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>8</span> {
+    <span class='ident'>filter</span>.<span class='ident'>inputs</span>[<span class='number'>0</span>] <span class='op'>=</span> <span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>f32</span>;
+    <span class='ident'>filter</span>.<span class='ident'>tick</span>(<span class='ident'>i</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>f32</span>, <span class='ident'>filter</span>.<span class='ident'>outputs</span>[<span class='number'>0</span>]);
+}</pre>
+</div><h2 class='fields'>Fields</h2>
+<table><tr class='stab '>
+                                  <td id='structfield.device'><code>device</code></td><td><div class='docblock'><p>The AudioDevice being wrapped.</p>
+</div></td></tr><tr class='stab '>
+                                  <td id='structfield.inputs'><code>inputs</code></td><td><div class='docblock'><p>The input buffer.</p>
+</div></td></tr><tr class='stab '>
+                                  <td id='structfield.outputs'><code>outputs</code></td><td><div class='docblock'><p>The output buffer.</p>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;D&gt; <a class='struct' href='../../oxcable/wrappers/struct.Buffered.html' title='oxcable::wrappers::Buffered'>Buffered</a>&lt;D&gt; <span class='where'>where D: <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a></span></code></h3><div class='impl-items'><h4 id='method.tick' class='method'><code>fn <a href='#method.tick' class='fnname'>tick</a>(&amp;mut self, t: <a class='type' href='../../oxcable/types/type.Time.html' title='oxcable::types::Time'>Time</a>)</code></h4>
+<div class='docblock'><p>Calls the device&#39;s tick method using the wrapper&#39;s buffers.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;D&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;D&gt; for <a class='struct' href='../../oxcable/wrappers/struct.Buffered.html' title='oxcable::wrappers::Buffered'>Buffered</a>&lt;D&gt; <span class='where'>where D: <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a></span></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(device: D) -&gt; Self</code></h4>
+</div><h3 class='impl'><code>impl&lt;D&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../oxcable/wrappers/struct.Buffered.html' title='oxcable::wrappers::Buffered'>Buffered</a>&lt;D&gt; <span class='where'>where D: <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a></span></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = D</code></h4>
+<h4 id='method.deref' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;self) -&gt; &amp;D</code></h4>
+</div><h3 class='impl'><code>impl&lt;D&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../oxcable/wrappers/struct.Buffered.html' title='oxcable::wrappers::Buffered'>Buffered</a>&lt;D&gt; <span class='where'>where D: <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a></span></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>(&amp;mut self) -&gt; &amp;mut D</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

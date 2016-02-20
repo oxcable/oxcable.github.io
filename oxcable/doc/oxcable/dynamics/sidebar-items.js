@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["compressor","A compression filter."],["level_detector","An envelope estimator."],["limiter","A limiter."],["noise_gate","A noise gate."]]});

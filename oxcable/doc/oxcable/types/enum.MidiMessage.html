@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `MidiMessage` enum in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, MidiMessage">
+
+    <title>oxcable::types::MidiMessage - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>types</a></p><script>window.sidebarCurrent = {name: 'MidiMessage', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>types</a>::<wbr><a class='enum' href=''>MidiMessage</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-1790' class='srclink' href='../../src/oxcable/types.rs.html#39-68' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum MidiMessage {
+    NoteOn(<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>),
+    NoteOff(<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>),
+    PitchBend(<a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>),
+    PolyphonicAftertouch(<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>),
+    ChannelAftertouch(<a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>),
+    SustainPedal(<a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
+    Portamento(<a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
+    Sostenuto(<a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
+    SoftPedal(<a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
+    LegatoPedal(<a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
+    Hold2(<a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
+    ControlChange(<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>),
+    ProgramChange(<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>),
+    Other(<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>),
+}</pre><div class='docblock'><p>The contents of a MIDI message.</p>
+
+<p>This enum wraps a useful subset of possible MIDI message. For further
+details on what these message represent, consult a complete MIDI
+documentation.</p>
+
+<p>Certain messages are parsed out to more useful datatypes:</p>
+
+<ul>
+<li>Velocities are converted to floats between 0.0 and 1.0</li>
+<li>Pressures are converted to floats between 0.0 and 1.0</li>
+<li>Bend is converted to a float from -1.0 to 1.0</li>
+</ul>
+
+<p>Any MIDI type not specifically enumerated preserves the raw bytes as <code>Other</code>.</p>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.NoteOn'><code>NoteOn</code></td><td><div class='docblock'><p>NoteOn(note number, velocity)</p>
+</div></td></tr><tr><td id='variant.NoteOff'><code>NoteOff</code></td><td><div class='docblock'><p>NoteOff(note number, velocity)</p>
+</div></td></tr><tr><td id='variant.PitchBend'><code>PitchBend</code></td><td><div class='docblock'><p>PitchBend(bend)</p>
+</div></td></tr><tr><td id='variant.PolyphonicAftertouch'><code>PolyphonicAftertouch</code></td><td><div class='docblock'><p>PolyphonicAftertouch(note number, pressure)</p>
+</div></td></tr><tr><td id='variant.ChannelAftertouch'><code>ChannelAftertouch</code></td><td><div class='docblock'><p>ChannelAftertouch(pressure)</p>
+</div></td></tr><tr><td id='variant.SustainPedal'><code>SustainPedal</code></td><td><div class='docblock'><p>SustainPedal(on/off)</p>
+</div></td></tr><tr><td id='variant.Portamento'><code>Portamento</code></td><td><div class='docblock'><p>Portamento(on/off)</p>
+</div></td></tr><tr><td id='variant.Sostenuto'><code>Sostenuto</code></td><td><div class='docblock'><p>Sostenuto(on/off)</p>
+</div></td></tr><tr><td id='variant.SoftPedal'><code>SoftPedal</code></td><td><div class='docblock'><p>SoftPedal(on/off)</p>
+</div></td></tr><tr><td id='variant.LegatoPedal'><code>LegatoPedal</code></td><td><div class='docblock'><p>LegatoPedal(on/off)</p>
+</div></td></tr><tr><td id='variant.Hold2'><code>Hold2</code></td><td><div class='docblock'><p>Hold2(on/off)</p>
+</div></td></tr><tr><td id='variant.ControlChange'><code>ControlChange</code></td><td><div class='docblock'><p>ControlChange(controller, value)</p>
+</div></td></tr><tr><td id='variant.ProgramChange'><code>ProgramChange</code></td><td><div class='docblock'><p>ProgramChange(num)</p>
+</div></td></tr><tr><td id='variant.Other'><code>Other</code></td><td><div class='docblock'><p>Other(status, byte1, byte2)</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../oxcable/types/enum.MidiMessage.html' title='oxcable::types::MidiMessage'>MidiMessage</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../../oxcable/types/enum.MidiMessage.html' title='oxcable::types::MidiMessage'>MidiMessage</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../../oxcable/types/enum.MidiMessage.html' title='oxcable::types::MidiMessage'>MidiMessage</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../oxcable/types/enum.MidiMessage.html' title='oxcable::types::MidiMessage'>MidiMessage</a></code></h4>
+<h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

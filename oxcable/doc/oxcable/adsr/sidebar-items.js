@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Message","Defines the messages that the ADSR supports."]],"struct":[["Adsr","A multichannel ADSR filter."]]});

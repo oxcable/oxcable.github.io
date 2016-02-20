@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `types` mod in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, types">
+
+    <title>oxcable::types - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>oxcable</a></p><script>window.sidebarCurrent = {name: 'types', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>oxcable</a>::<wbr><a class='mod' href=''>types</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-1767' class='srclink' href='../../src/oxcable/types.rs.html#1-102' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Global types and constants.</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.MidiEvent.html'
+                               title='oxcable::types::MidiEvent'>MidiEvent</a></td>
+                        <td class='docblock short'>
+                             <p>The datatype of a MIDI event.</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.MidiMessage.html'
+                               title='oxcable::types::MidiMessage'>MidiMessage</a></td>
+                        <td class='docblock short'>
+                             <p>The contents of a MIDI message.</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='statics' class='section-header'><a href="#statics">Statics</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='static' href='static.SAMPLE_RATE.html'
+                               title='oxcable::types::SAMPLE_RATE'>SAMPLE_RATE</a></td>
+                        <td class='docblock short'>
+                             <p>The global sample rate, in Hz.</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.AudioDevice.html'
+                               title='oxcable::types::AudioDevice'>AudioDevice</a></td>
+                        <td class='docblock short'>
+                             <p>A device that processes and/or generates audio.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.MessageReceiver.html'
+                               title='oxcable::types::MessageReceiver'>MessageReceiver</a></td>
+                        <td class='docblock short'>
+                             <p>A device that receives messages.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.MidiDevice.html'
+                               title='oxcable::types::MidiDevice'>MidiDevice</a></td>
+                        <td class='docblock short'>
+                             <p>A device that generates MIDI events.</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='type' href='type.Sample.html'
+                               title='oxcable::types::Sample'>Sample</a></td>
+                        <td class='docblock short'>
+                             <p>The datatype of a single audio sample.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='type' href='type.Time.html'
+                               title='oxcable::types::Time'>Time</a></td>
+                        <td class='docblock short'>
+                             <p>The datatype of a single time tick.</p>
+
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

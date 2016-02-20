@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["MidiEngine","A system resources manager."],["MidiIn","Reads audio from the OS's default midi device."]]});

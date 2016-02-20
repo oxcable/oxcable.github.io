@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["moorer_reverb","An algorithmic, IIR reverberation filter."],["rooms","Parameter sets for simulating different reverberant environments."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["FilterMode","Specifies the mode for a first order `Filter`."],["Message","Defines the messages that the Filter supports."]],"struct":[["Filter","A single pole filter."]]});

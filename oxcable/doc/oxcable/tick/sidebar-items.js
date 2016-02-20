@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Tick","Methods for processing something in discrete time steps. By defining how to perform a single tick, this trait gives several convenience methods."]]});

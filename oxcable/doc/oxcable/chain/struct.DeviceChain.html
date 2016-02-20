@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `DeviceChain` struct in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, DeviceChain">
+
+    <title>oxcable::chain::DeviceChain - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>chain</a></p><script>window.sidebarCurrent = {name: 'DeviceChain', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>chain</a>::<wbr><a class='struct' href=''>DeviceChain</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-119' class='srclink' href='../../src/oxcable/chain.rs.html#35-39' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct DeviceChain {
+    // some fields omitted
+}</pre><div class='docblock'><p>A container for a series of audio devices.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../oxcable/chain/struct.DeviceChain.html' title='oxcable::chain::DeviceChain'>DeviceChain</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='#method.from' class='fnname'>from</a>&lt;D&gt;(device: D) -&gt; Self <span class='where'>where D: 'static + <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a></span></code></h4>
+<div class='docblock'><p>Creates a new chain that starts from the provided device. This device
+will receive no inputs unless they are manually supplied using
+DeviceChain::get_input.</p>
+</div><h4 id='method.into' class='method'><code>fn <a href='#method.into' class='fnname'>into</a>&lt;D&gt;(self, device: D) -&gt; Self <span class='where'>where D: 'static + <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a></span></code></h4>
+<div class='docblock'><p>Appends the provided device to the end of the chain. This device will be
+passed the output of the last device as input. This method returns the
+same chain it was passed.</p>
+
+<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<p>Panics if the provided device does not have as many inputs as the
+previous device has outputs.</p>
+</div><h4 id='method.get_input' class='method'><code>fn <a href='#method.get_input' class='fnname'>get_input</a>(&amp;mut self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a class='type' href='../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></h4>
+<div class='docblock'><p>Return a mutable slice to the input of the first device in the chain.</p>
+
+<p>These inputs never get overwritten, so if you are supplying input you
+must manually zero the buffer again.</p>
+</div><h4 id='method.get_output' class='method'><code>fn <a href='#method.get_output' class='fnname'>get_output</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='type' href='../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></h4>
+<div class='docblock'><p>Returns a slice to the output of the last device in the chain.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../oxcable/tick/trait.Tick.html' title='oxcable::tick::Tick'>Tick</a> for <a class='struct' href='../../oxcable/chain/struct.DeviceChain.html' title='oxcable::chain::DeviceChain'>DeviceChain</a></code></h3><div class='impl-items'><h4 id='method.tick' class='method'><code>fn <a href='../../oxcable/tick/trait.Tick.html#method.tick' class='fnname'>tick</a>(&amp;mut self)</code></h4>
+<h4 id='method.tick_n_times' class='method'><code>fn <a href='../../oxcable/tick/trait.Tick.html#method.tick_n_times' class='fnname'>tick_n_times</a>(&amp;mut self, n: <a class='type' href='../../oxcable/types/type.Time.html' title='oxcable::types::Time'>Time</a>)</code></h4>
+<h4 id='method.tick_forever' class='method'><code>fn <a href='../../oxcable/tick/trait.Tick.html#method.tick_forever' class='fnname'>tick_forever</a>(&amp;mut self) -&gt; !</code></h4>
+<h4 id='method.tick_until_enter' class='method'><code>fn <a href='../../oxcable/tick/trait.Tick.html#method.tick_until_enter' class='fnname'>tick_until_enter</a>(&amp;mut self)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

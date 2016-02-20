@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `AudioDevice` trait in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, AudioDevice">
+
+    <title>oxcable::types::AudioDevice - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>types</a></p><script>window.sidebarCurrent = {name: 'AudioDevice', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>types</a>::<wbr><a class='trait' href=''>AudioDevice</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-1873' class='srclink' href='../../src/oxcable/types.rs.html#72-85' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait AudioDevice {
+    fn <a href='#tymethod.num_inputs' class='fnname'>num_inputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>;
+    fn <a href='#tymethod.num_outputs' class='fnname'>num_outputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>;
+    fn <a href='#tymethod.tick' class='fnname'>tick</a>(&amp;mut self, t: <a class='type' href='../../oxcable/types/type.Time.html' title='oxcable::types::Time'>Time</a>, inputs: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='type' href='../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, outputs: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a class='type' href='../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>);
+}</pre><div class='docblock'><p>A device that processes and/or generates audio.</p>
+</div>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.num_inputs' class='method stab '><code>fn <a href='#tymethod.num_inputs' class='fnname'>num_inputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Returns the number of input channels the device accepts.</p>
+</div><h3 id='tymethod.num_outputs' class='method stab '><code>fn <a href='#tymethod.num_outputs' class='fnname'>num_outputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h3><div class='docblock'><p>Return sthe number of output channels the device returns.</p>
+</div><h3 id='tymethod.tick' class='method stab '><code>fn <a href='#tymethod.tick' class='fnname'>tick</a>(&amp;mut self, t: <a class='type' href='../../oxcable/types/type.Time.html' title='oxcable::types::Time'>Time</a>, inputs: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='type' href='../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, outputs: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a class='type' href='../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h3><div class='docblock'><p>Processes a single frame worth of audio data. This function should be
+called once per time step, starting at <code>t=0</code>.</p>
+
+<p>If a device accepts no inputs, or generates no outputs, then zero length
+slices may be passed in.</p>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/adsr/struct.Adsr.html' title='oxcable::adsr::Adsr'>Adsr</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/delay/struct.Delay.html' title='oxcable::delay::Delay'>Delay</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/dynamics/compressor/struct.Compressor.html' title='oxcable::dynamics::compressor::Compressor'>Compressor</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/dynamics/limiter/struct.Limiter.html' title='oxcable::dynamics::limiter::Limiter'>Limiter</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/dynamics/noise_gate/struct.NoiseGate.html' title='oxcable::dynamics::noise_gate::NoiseGate'>NoiseGate</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/filters/first_order/struct.Filter.html' title='oxcable::filters::first_order::Filter'>Filter</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/filters/second_order/struct.Filter.html' title='oxcable::filters::second_order::Filter'>Filter</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/io/audio/struct.AudioIn.html' title='oxcable::io::audio::AudioIn'>AudioIn</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/io/audio/struct.AudioOut.html' title='oxcable::io::audio::AudioOut'>AudioOut</a></code></li>
+<li><code>impl&lt;R: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>&gt; <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/io/wav/struct.WavReader.html' title='oxcable::io::wav::WavReader'>WavReader</a>&lt;R&gt;</code></li>
+<li><code>impl&lt;W: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Seek.html' title='std::io::Seek'>Seek</a>&gt; <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/io/wav/struct.WavWriter.html' title='oxcable::io::wav::WavWriter'>WavWriter</a>&lt;W&gt;</code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/mixers/adder/struct.Adder.html' title='oxcable::mixers::adder::Adder'>Adder</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/mixers/gain/struct.Gain.html' title='oxcable::mixers::gain::Gain'>Gain</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/mixers/multiplexer/struct.Multiplexer.html' title='oxcable::mixers::multiplexer::Multiplexer'>Multiplexer</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/mixers/multiplier/struct.Multiplier.html' title='oxcable::mixers::multiplier::Multiplier'>Multiplier</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/oscillator/struct.Oscillator.html' title='oxcable::oscillator::Oscillator'>Oscillator</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/reverb/moorer_reverb/struct.MoorerReverb.html' title='oxcable::reverb::moorer_reverb::MoorerReverb'>MoorerReverb</a></code></li>
+<li><code>impl <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/tremolo/struct.Tremolo.html' title='oxcable::tremolo::Tremolo'>Tremolo</a></code></li>
+<li><code>impl&lt;D&gt; <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../oxcable/wrappers/struct.Messaged.html' title='oxcable::wrappers::Messaged'>Messaged</a>&lt;D&gt; <span class='where'>where D: <a class='trait' href='../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> + <a class='trait' href='../../oxcable/types/trait.MessageReceiver.html' title='oxcable::types::MessageReceiver'>MessageReceiver</a></span></code></li>
+</ul><script type="text/javascript" async
+                              src="../../implementors/oxcable/types/trait.AudioDevice.js">
+                      </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

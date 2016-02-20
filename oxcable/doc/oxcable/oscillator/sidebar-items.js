@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["AntialiasType","Antialiasing method for certain waveforms."],["Message","Defines the messages that the Oscillator supports."],["Waveform","Oscillator waveforms."]],"struct":[["Oscillator","An oscillator that generates a periodic waveform."]]});

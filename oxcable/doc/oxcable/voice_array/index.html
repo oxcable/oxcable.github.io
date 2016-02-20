@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `voice_array` mod in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, voice_array">
+
+    <title>oxcable::voice_array - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>oxcable</a></p><script>window.sidebarCurrent = {name: 'voice_array', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>oxcable</a>::<wbr><a class='mod' href=''>voice_array</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-2167' class='srclink' href='../../src/oxcable/voice_array.rs.html#1-206' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>A polyphonic voice array.</p>
+
+<p>The voice array maintains a set of identical voices, and is designed to
+simplify building polyphonic instruments.</p>
+
+<p>Each voice may be in two states: playing or free. The array tracks the play
+state and note of each voice, and uses them to select a voice to handle new
+note events.</p>
+
+<p>When a voice is selected to start or stop playing, a reference to that voice
+is then returned so the implementor can trigger any changes needed in the
+voice.</p>
+
+<h2 id='example' class='section-header'><a href='#example'>Example</a></h2>
+<p>For an example instrument that uses <code>VoiceArray</code>, see
+<a href="../../src/test_voice_array/test_voice_array.rs.html">test_voice_array.rs</a>.</p>
+
+<h2 id='note-selection' class='section-header'><a href='#note-selection'>Note selection</a></h2>
+<p>When selecting which voice to use for a new note event, several criteria are
+used:</p>
+
+<ol>
+<li>If the triggered note is already playing, return the same voice already
+playing it.</li>
+<li>If there are free voices, return the voice that has been free the
+longest.</li>
+<li>If there are no free voices, return the voice that has been held the
+longest.</li>
+</ol>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.VoiceArray.html'
+                               title='oxcable::voice_array::VoiceArray'>VoiceArray</a></td>
+                        <td class='docblock short'>
+                             <p>A manager for a polyphonic set of voices.</p>
+
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

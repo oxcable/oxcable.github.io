@@ -1,0 +1,1 @@
+initSidebarItems({"static":[["HALL","A generic concert hall."]],"struct":[["Room","A container for Moorer reverberator parameters."]]});

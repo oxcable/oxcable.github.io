@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["BufferedOutput","Bundles an `AudioDevice` with an allocated output buffer."]]});

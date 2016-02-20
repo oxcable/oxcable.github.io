@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["DeviceChain","A container for a series of audio devices."]]});

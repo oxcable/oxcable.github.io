@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["decibel_to_ratio","Converts a decibel ratio to an amplitude multiplier."],["midi_note_to_freq","Converts a MIDI note number to frequency in Hz."],["ratio_to_decibel","Converts an amplitude multiplier to decibels."]]});

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `VoiceArray` struct in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, VoiceArray">
+
+    <title>oxcable::voice_array::VoiceArray - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>voice_array</a></p><script>window.sidebarCurrent = {name: 'VoiceArray', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>oxcable</a>::<wbr><a href='index.html'>voice_array</a>::<wbr><a class='struct' href=''>VoiceArray</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-2171' class='srclink' href='../../src/oxcable/voice_array.rs.html#36-46' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct VoiceArray&lt;T&gt; {
+    // some fields omitted
+}</pre><div class='docblock'><p>A manager for a polyphonic set of voices.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;T&gt; <a class='struct' href='../../oxcable/voice_array/struct.VoiceArray.html' title='oxcable::voice_array::VoiceArray'>VoiceArray</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(voices: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;) -&gt; Self</code></h4>
+<div class='docblock'><p>Creates a new VoiceArray from the provided vector of voices.</p>
+
+<p><code>voices</code> is moved inside the array.</p>
+</div><h4 id='method.iter' class='method'><code>fn <a href='#method.iter' class='fnname'>iter</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.Iter.html' title='core::slice::Iter'>Iter</a>&lt;T&gt;</code></h4>
+<div class='docblock'><p>Returns an iterator over the voice objects.</p>
+</div><h4 id='method.iter_mut' class='method'><code>fn <a href='#method.iter_mut' class='fnname'>iter_mut</a>(&amp;mut self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.IterMut.html' title='core::slice::IterMut'>IterMut</a>&lt;T&gt;</code></h4>
+<div class='docblock'><p>Returns a mutable iterator over the voice objects.</p>
+</div><h4 id='method.note_on' class='method'><code>fn <a href='#method.note_on' class='fnname'>note_on</a>(&amp;mut self, note: <a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; &amp;mut T</code></h4>
+<div class='docblock'><p>Selects a new voice, marks it as playing, and loans it out for
+modification.</p>
+</div><h4 id='method.note_off' class='method'><code>fn <a href='#method.note_off' class='fnname'>note_off</a>(&amp;mut self, note: <a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut T&gt;</code></h4>
+<div class='docblock'><p>Finds the voice playing the provided note, marks it as free, then loans
+it out for modification. If no voice is playing the provided note, then
+<code>None</code> is returned instead.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `WavReader` struct in crate `oxcable`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, WavReader">
+
+    <title>oxcable::io::wav::WavReader - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../../index.html'>oxcable</a>::<wbr><a href='../index.html'>io</a>::<wbr><a href='index.html'>wav</a></p><script>window.sidebarCurrent = {name: 'WavReader', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>oxcable</a>::<wbr><a href='../index.html'>io</a>::<wbr><a href='index.html'>wav</a>::<wbr><a class='struct' href=''>WavReader</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-1097' class='srclink' href='../../../src/oxcable/io/wav.rs.html#16-21' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct WavReader&lt;R: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>&gt; {
+    // some fields omitted
+}</pre><div class='docblock'><p>Reads audio from a wav file.</p>
+
+<p>The reader will continue until it runs out of samples. When it does, the
+reader will return silence until it is reset to the beginning of the file.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../oxcable/io/wav/struct.WavReader.html' title='oxcable::io::wav::WavReader'>WavReader</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/fs/struct.File.html' title='std::fs::File'>File</a>&gt;</code></h3><div class='impl-items'><h4 id='method.open' class='method'><code>fn <a href='#method.open' class='fnname'>open</a>&lt;P: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(filename: P) -&gt; <a class='type' href='../../../oxcable/error/type.Result.html' title='oxcable::error::Result'>Result</a>&lt;Self&gt;</code></h4>
+<div class='docblock'><p>Returns a <code>WavReader</code> reading the provided file.</p>
+</div></div><h3 class='impl'><code>impl&lt;R: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>&gt; <a class='struct' href='../../../oxcable/io/wav/struct.WavReader.html' title='oxcable::io::wav::WavReader'>WavReader</a>&lt;R&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(reader: R) -&gt; <a class='type' href='../../../oxcable/error/type.Result.html' title='oxcable::error::Result'>Result</a>&lt;Self&gt;</code></h4>
+<div class='docblock'><p>Retuns a <code>WavReader</code> reading anything implementing <code>Read</code>.</p>
+</div><h4 id='method.get_num_samples' class='method'><code>fn <a href='#method.get_num_samples' class='fnname'>get_num_samples</a>(&amp;self) -&gt; <a class='type' href='../../../oxcable/types/type.Time.html' title='oxcable::types::Time'>Time</a></code></h4>
+<div class='docblock'><p>Returns the number of audio samples in the wav file.</p>
+</div><h4 id='method.is_done' class='method'><code>fn <a href='#method.is_done' class='fnname'>is_done</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Returns true if we have read the entire wav file.</p>
+</div></div><h3 class='impl'><code>impl&lt;R: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Seek.html' title='std::io::Seek'>Seek</a>&gt; <a class='struct' href='../../../oxcable/io/wav/struct.WavReader.html' title='oxcable::io::wav::WavReader'>WavReader</a>&lt;R&gt;</code></h3><div class='impl-items'><h4 id='method.restart' class='method'><code>fn <a href='#method.restart' class='fnname'>restart</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
+<div class='docblock'><p>Resets the reader to begin reading from the start of the file.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;R: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>&gt; <a class='trait' href='../../../oxcable/types/trait.AudioDevice.html' title='oxcable::types::AudioDevice'>AudioDevice</a> for <a class='struct' href='../../../oxcable/io/wav/struct.WavReader.html' title='oxcable::io::wav::WavReader'>WavReader</a>&lt;R&gt;</code></h3><div class='impl-items'><h4 id='method.num_inputs' class='method'><code>fn <a href='../../../oxcable/types/trait.AudioDevice.html#method.num_inputs' class='fnname'>num_inputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<h4 id='method.num_outputs' class='method'><code>fn <a href='../../../oxcable/types/trait.AudioDevice.html#method.num_outputs' class='fnname'>num_outputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<h4 id='method.tick' class='method'><code>fn <a href='../../../oxcable/types/trait.AudioDevice.html#method.tick' class='fnname'>tick</a>(&amp;mut self, _: <a class='type' href='../../../oxcable/types/type.Time.html' title='oxcable::types::Time'>Time</a>, _: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='type' href='../../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, outputs: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a class='type' href='../../../oxcable/types/type.Sample.html' title='oxcable::types::Sample'>Sample</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "oxcable";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>
