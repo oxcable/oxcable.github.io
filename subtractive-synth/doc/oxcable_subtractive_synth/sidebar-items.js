@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Message","Defines the messages that the synthesizer supports."]],"struct":[["SubtractiveSynth","A polyphonic subtractive synthesizer."]]});

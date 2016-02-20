@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `oxcable_subtractive_synth` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, oxcable_subtractive_synth">
+
+    <title>oxcable_subtractive_synth - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'oxcable_subtractive_synth', ty: 'mod', relpath: '../'};</script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>oxcable_subtractive_synth</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-0' class='srclink' href='../src/oxcable_subtractive_synth/lib.rs.html#1-459' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>A polyphonic subtractive synthesizer.</p>
+
+<p>This synthesizer uses building blocks from <code>oxcable</code> to perform basic
+subtractive synthesis. The synth is controlled via MIDI and packaged as an
+<code>AudioDevice</code>.</p>
+
+<h1 id='signal-chain' class='section-header'><a href='#signal-chain'>Signal Chain</a></h1>
+<p>The synthesizer is polyphonic. The signal chain is composed of:</p>
+
+<ol>
+<li>Two oscillators, operating independently. The oscillators may be
+transposed relative to each other.</li>
+<li>Independent ADSR envelopes for each voice.</li>
+<li>The signal is then passed through a multimode filter.</li>
+</ol>
+
+<p>Additionally, the synthesizer has an internal low frequency oscillator. This
+LFO may be used to add vibrato to the oscillators, or tremolo to the output.</p>
+
+<h1 id='controlling-tone' class='section-header'><a href='#controlling-tone'>Controlling Tone</a></h1>
+<p>The synthesizer provides three ways to configure its tone:</p>
+
+<ol>
+<li>At initialization, using the builder pattern.</li>
+<li>During runtime, by passing it a <a href="enum.Message.html"><code>Message</code></a>.</li>
+<li>With MIDI control signals, using a control map...</li>
+</ol>
+
+<h2 id='midi-control-signals' class='section-header'><a href='#midi-control-signals'>MIDI Control Signals</a></h2>
+<p>Many MIDI controllers feature additional knobs and sliders. These use
+a special type of MIDI signal that is left open to instrument makers to
+use as they desire.  To use these knobs for tone control, the synth uses an
+optional closure to convert these control signals to synthesizer messages.
+This closure takes the form:</p>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>fn</span> <span class='ident'>control_map</span>(<span class='ident'>controller</span>: <span class='ident'>u8</span>, <span class='ident'>value</span>: <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Message</span><span class='op'>&gt;</span>;</pre>
+
+<p>The exact values used can vary from device to device, but <code>controller</code> will
+always specify which knob is being used, and the <code>value</code> will range from 0 to
+127.</p>
+
+<p>If <code>Some(msg)</code> is returned, it will be used to update the synth immediately;
+if <code>None</code> is returned, the MIDI message is ignored.</p>
+
+<p>The following example uses knobs on the Alesis QX49 keyboard to adjust the
+ADSR envelope and vibrato:</p>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>oxcable_subtractive_synth</span> <span class='kw'>as</span> <span class='ident'>subsynth</span>;
+<span class='kw'>fn</span> <span class='ident'>qx49_controls</span>(<span class='ident'>controller</span>: <span class='ident'>u8</span>, <span class='ident'>value</span>: <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>subsynth</span>::<span class='ident'>Message</span><span class='op'>&gt;</span> {
+    <span class='kw'>let</span> <span class='ident'>range</span> <span class='op'>=</span> <span class='ident'>value</span> <span class='kw'>as</span> <span class='ident'>f32</span> <span class='op'>/</span> <span class='number'>127.0</span>; <span class='comment'>// normalize to range [0.0, 1.0]</span>
+    <span class='kw'>match</span> <span class='ident'>controller</span> {
+        <span class='number'>22</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>subsynth</span>::<span class='ident'>SetAttack</span>(<span class='number'>5.0</span><span class='op'>*</span><span class='ident'>range</span>)),
+        <span class='number'>23</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>subsynth</span>::<span class='ident'>SetDecay</span>(<span class='number'>5.0</span><span class='op'>*</span><span class='ident'>range</span>)),
+        <span class='number'>24</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>subsynth</span>::<span class='ident'>SetSustain</span>(<span class='ident'>range</span>)),
+        <span class='number'>25</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>subsynth</span>::<span class='ident'>SetRelease</span>(<span class='number'>5.0</span><span class='op'>*</span><span class='ident'>range</span>)),
+        <span class='number'>26</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>subsynth</span>::<span class='ident'>SetLFOFreq</span>(<span class='number'>10.0</span><span class='op'>*</span><span class='ident'>range</span>)),
+        <span class='number'>27</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>subsynth</span>::<span class='ident'>SetVibrato</span>(<span class='ident'>range</span>)),
+        _ <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>
+    }
+}</pre>
+</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+<table><tr><td><code>pub use self::<a class='enum' href='../oxcable_subtractive_synth/enum.Message.html' title='oxcable_subtractive_synth::Message'>Message</a>::*;</code></td></tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.SubtractiveSynth.html'
+                               title='oxcable_subtractive_synth::SubtractiveSynth'>SubtractiveSynth</a></td>
+                        <td class='docblock short'>
+                             <p>A polyphonic subtractive synthesizer.</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.Message.html'
+                               title='oxcable_subtractive_synth::Message'>Message</a></td>
+                        <td class='docblock short'>
+                             <p>Defines the messages that the synthesizer supports.</p>
+
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "oxcable_subtractive_synth";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `SubtractiveSynth` struct in crate `oxcable_subtractive_synth`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, SubtractiveSynth">
+
+    <title>oxcable_subtractive_synth::SubtractiveSynth - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>oxcable_subtractive_synth</a></p><script>window.sidebarCurrent = {name: 'SubtractiveSynth', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>oxcable_subtractive_synth</a>::<wbr><a class='struct' href=''>SubtractiveSynth</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-94' class='srclink' href='../src/oxcable_subtractive_synth/lib.rs.html#122-134' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SubtractiveSynth&lt;M: MidiDevice&gt; {
+    // some fields omitted
+}</pre><div class='docblock'><p>A polyphonic subtractive synthesizer.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;M&gt; <a class='struct' href='../oxcable_subtractive_synth/struct.SubtractiveSynth.html' title='oxcable_subtractive_synth::SubtractiveSynth'>SubtractiveSynth</a>&lt;M&gt; <span class='where'>where M: MidiDevice</span></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(midi: M, num_voices: <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; Self</code></h4>
+<div class='docblock'><p>Returns a new subtractive synth.</p>
+
+<ul>
+<li><code>midi</code>: the MIDI source to use.</li>
+<li><code>num_voices</code>: the maximum voices that can play at one time.</li>
+</ul>
+</div><h4 id='method.control_map' class='method'><code>fn <a href='#method.control_map' class='fnname'>control_map</a>&lt;F&gt;(self, map: F) -&gt; Self <span class='where'>where F: 'static + <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../oxcable_subtractive_synth/enum.Message.html' title='oxcable_subtractive_synth::Message'>Message</a>&gt;</span></code></h4>
+<div class='docblock'><p>Sets the control signal map to the provided closure, then return the
+same synth.</p>
+
+<p>For further details on control mappings, see the <a href="index.html#midi-control-signals">main synth
+documentation</a>.</p>
+</div><h4 id='method.gain' class='method'><code>fn <a href='#method.gain' class='fnname'>gain</a>(self, gain: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the gain of the synth in decibels, then return the same synth.</p>
+</div><h4 id='method.osc1' class='method'><code>fn <a href='#method.osc1' class='fnname'>osc1</a>(self, waveform: Waveform) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the waveform of the synth&#39;s first oscillator, then return the same
+synth.</p>
+</div><h4 id='method.osc2' class='method'><code>fn <a href='#method.osc2' class='fnname'>osc2</a>(self, waveform: Waveform) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the waveform of the synth&#39;s second oscillator, then return the same
+synth.</p>
+</div><h4 id='method.osc1_transpose' class='method'><code>fn <a href='#method.osc1_transpose' class='fnname'>osc1_transpose</a>(self, steps: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the transposition of the synth&#39;s first oscillator in steps, then
+return the same synth.</p>
+</div><h4 id='method.osc2_transpose' class='method'><code>fn <a href='#method.osc2_transpose' class='fnname'>osc2_transpose</a>(self, steps: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the transposition of the synth&#39;s second oscillator in steps, then
+return the same synth.</p>
+</div><h4 id='method.adsr' class='method'><code>fn <a href='#method.adsr' class='fnname'>adsr</a>(self, attack_time: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>, decay_time: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>, sustain_level: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>, release_time: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the synth&#39;s ADSR envelope, then return the same synth.</p>
+
+<ul>
+<li><code>attack_time</code> specifies the length of the attack in seconds.</li>
+<li><code>decay_time</code> specifies the length of the decay in seconds.</li>
+<li><code>sustain_level</code> specifies the amplitude of the sustain from 0 to 1.</li>
+<li><code>release_time</code> specifies the length of the release in seconds.</li>
+</ul>
+</div><h4 id='method.lfo' class='method'><code>fn <a href='#method.lfo' class='fnname'>lfo</a>(self, freq: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the synth&#39;s LFO frequency, then return the same synth.</p>
+</div><h4 id='method.vibrato' class='method'><code>fn <a href='#method.vibrato' class='fnname'>vibrato</a>(self, vibrato: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the synth&#39;s vibrato intensity in steps, then return the same synth.</p>
+</div><h4 id='method.tremolo' class='method'><code>fn <a href='#method.tremolo' class='fnname'>tremolo</a>(self, tremolo: <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the synth&#39;s tremolo intensity in decibels, then return the same synth.</p>
+</div><h4 id='method.first_order' class='method'><code>fn <a href='#method.first_order' class='fnname'>first_order</a>(self, mode: FilterMode) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the synth&#39;s filter to a first order with the specified mode, then
+return the same synth.</p>
+</div><h4 id='method.second_order' class='method'><code>fn <a href='#method.second_order' class='fnname'>second_order</a>(self, mode: FilterMode) -&gt; Self</code></h4>
+<div class='docblock'><p>Sets the synth&#39;s filter to a second order with the specified mode, then
+return the same synth.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;M&gt; MessageReceiver for <a class='struct' href='../oxcable_subtractive_synth/struct.SubtractiveSynth.html' title='oxcable_subtractive_synth::SubtractiveSynth'>SubtractiveSynth</a>&lt;M&gt; <span class='where'>where M: MidiDevice</span></code></h3><div class='impl-items'><h4 id='assoc_type.Msg' class='type'><code>type Msg = <a class='enum' href='../oxcable_subtractive_synth/enum.Message.html' title='oxcable_subtractive_synth::Message'>Message</a></code></h4>
+<h4 id='method.handle_message' class='method'><code>fn <a href='#method.handle_message' class='fnname'>handle_message</a>(&amp;mut self, msg: <a class='enum' href='../oxcable_subtractive_synth/enum.Message.html' title='oxcable_subtractive_synth::Message'>Message</a>)</code></h4>
+</div><h3 class='impl'><code>impl&lt;M&gt; AudioDevice for <a class='struct' href='../oxcable_subtractive_synth/struct.SubtractiveSynth.html' title='oxcable_subtractive_synth::SubtractiveSynth'>SubtractiveSynth</a>&lt;M&gt; <span class='where'>where M: MidiDevice</span></code></h3><div class='impl-items'><h4 id='method.num_inputs' class='method'><code>fn <a href='#method.num_inputs' class='fnname'>num_inputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<h4 id='method.num_outputs' class='method'><code>fn <a href='#method.num_outputs' class='fnname'>num_outputs</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<h4 id='method.tick' class='method'><code>fn <a href='#method.tick' class='fnname'>tick</a>(&amp;mut self, t: Time, _: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a>Sample<a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, outputs: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a>Sample<a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "oxcable_subtractive_synth";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
